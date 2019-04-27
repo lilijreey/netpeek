@@ -1,0 +1,21 @@
+#Raw socket Packte socket, A 2-4 layer network traffic peek,Leanr 2-4 layer protocol
+
+
+# Raw socket see raw(7)
+ limits:
+  1. only recv incoming packets
+
+def make_ip_tcp_raw_socket
+  return Socket.new(S::AF_INET, S::SOCK_RAW, S::IPPROTO_TCP)
+end
+
+def make_ip_udp_raw_socket
+  return Socket.new(S::AF_INET, S::SOCK_RAW, S::IPPROTO_UDP)
+end
+
+## Packet socket see packet(7)
+can get all 2 layer in-and-out traffic
+Socket.new(S::AF_PACKET, S::SOCK_RAW, S::ntohs(0x0003))
+
+具体的2层协议看 <linux/if_ether.h> include file for physical-layer protocols.
+#define ETH_P_ALL	0x0003		/* Every packet (be careful!!!) */
